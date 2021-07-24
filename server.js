@@ -91,6 +91,11 @@ class TaskTrackerServer {
         debug("...Started");
         self._logStartMessages();
 
+        // Debug logs output in testmode only
+        if (config.get("server:testmode")) {
+          self._startTestMode();
+        }
+
         debug("Server ready (success)");
         return resolve(self);
       });
