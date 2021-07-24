@@ -1,0 +1,27 @@
+{
+  "name": "task-tracker",
+  "version": "1.0.0",
+  "description": "A task-tracker server to manage your todo tasks",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/basebandit/task-tracker/server"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Basebandit",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "nconf": "^0.11.3",
+    "pino": "^6.13.0",
+    "stoppable": "^1.1.0",
+    "uuid": "^8.3.2"
+  }
+}
