@@ -19,7 +19,22 @@ class BootLogger {
     );
   }
 }
-
+/**
+ * @description initCore registers/starts all core services which we cannot do without.
+ * @param {Object}  taskTrackerServer - Our main server instance
+ *
+ */
+async function initCore(taskTrackerServer) {
+  debug("Begin: initCore");
+  debug("Begin: Job Service");
+  const JobService = require("./services/jobs");
+  const jobs = new JobService();
+  taskTrackerServer.registerCleanupTask(async () => {
+    await jobs.shutdown();
+  });
+  debug("End: Job service");
+  debug("End: initCore");
+}
 // async function initDatabase({config,logging}){
 //   /**Pull in all the database setup, migration code in  here and setup the database here */
 //   await somefunctionToMakeDatabaseAvailable()
@@ -65,6 +80,10 @@ async function bootTaskTracker(app) {
     await taskTrackerServer.start(app);
     bootLogger.log("server started");
     debug("End: load server");
+
+    debug("Begin: Load core services");
+    await initCore(taskTrackerServer);
+    debug("End: Load core services");
 
     // We return the server purely for testing purposes
     debug("End Boot: Returning TaskTracker Server");
