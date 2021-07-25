@@ -102,7 +102,7 @@ class TaskTrackerServer {
 
       stoppable(self.httpServer, config.get("server:shutdownTimeout"));
 
-      //Ensure that task tracker exists correctly on Ctrl+C and
+      //Ensure that task tracker exists correctly on Ctrl+C and SIGTERM
       process
         .removeAllListeners("SIGINT")
         .on("SIGINT", self.shutdown.bind(self))
